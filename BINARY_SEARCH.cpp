@@ -223,10 +223,11 @@ freopen("output.txt","w",stdout);
 
 
 // FIND THE SINGLE ELEMENT IN SORTED ARRAY 
-vector<int>vec = {3,3,7,7,10,11,11};
-int n = vec.size();
 
-cout<<FSESA(vec);
+// vector<int>vec = {3,3,7,7,10,11,11};
+// int n = vec.size();
+
+// cout<<FSESA(vec);
 
 
 
