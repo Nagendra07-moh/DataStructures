@@ -176,12 +176,51 @@ int FSESA(vector<int>vec){
 return -1;
 }
 
+// ----------------------------------------------------------------------------------------------------
 
 
+int findPeak(vector<int>vec){
+    int n = vec.size();
 
+    int low = 0;
+    int high = n-1;
+    int mid;
+    while(low<= high){
+        mid = (low+high)/2;
 
+        if((mid ==0 || vec[mid] >= vec[mid-1])&&(mid == n-1 || vec[mid] >= vec[mid+1])){
+            return mid;
+        }else if(mid>0 && vec[mid-1] >= vec[mid]){
+            high = mid-1;
+        }else{
+            low = mid+1;
+        }
+    }
 
+    return  -1;
+}
 
+// ----------------------------------------------------------------------------------------------------
+
+int sqrt(int n){
+    int low = 1;
+    int high = n;
+
+    int ans = 1;
+    while(low<=high){
+        int mid = (low+high)/2;
+
+        if((mid*mid)<=n){
+            ans =  mid;
+            low = mid+1;
+
+        }else{
+            high = mid-1;
+        }
+    }
+
+    return ans;
+}
 
 int main(){
 #ifndef ONLINE_JUDGE
@@ -229,7 +268,13 @@ freopen("output.txt","w",stdout);
 
 // cout<<FSESA(vec);
 
+// FIND THE PEAK ELEMENT OF THE ARRAY
 
+
+
+//FIND SQRT USING BINARY SEARCH ON ANSWER
+
+cout<<sqrt(25)<<endl;
 
 return 0;
 }

@@ -28,8 +28,10 @@ string str = "101011";
 // cout<<binaryStringToInt(str);
 
 int x = 23;
-string s = to_string(23);  
-s + 23;
+string s = x - '0';
+
+cout<<s;  
+
 
 
 
