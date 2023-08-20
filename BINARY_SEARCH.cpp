@@ -3,6 +3,8 @@ using namespace std;
 #define ll long long
 int MOD = 1000000007;
 
+                                   //WELCOME TO THE BINARY  SEARCH  WORLD
+// ....................................................................................................
 int SISRA(vector<int>&vec,int tar){
     int n = vec.size();
     int low = 0,high = vec.size()-1;
@@ -221,6 +223,104 @@ int sqrt(int n){
 
     return ans;
 }
+// -------------------------------------------------------------------------------------------------------
+
+
+int findBrute(int bph,vector<int>vec){
+    int count = 0;
+
+    for( auto it:vec){
+        if(it%bph != 0){
+            count += (it/bph)+1;
+        }else{
+            count += it/bph;
+        }
+    }
+    return count;
+}
+
+int bruteForce(vector<int>vec,int h){
+    int ans = 0;
+    int maxi =*max_element(vec.begin(),vec.end());
+    for(int i=1;i<=maxi;i++){
+        int tot = findBrute(i,vec);
+        // cout<<tot<<"-> "<<i<<endl;
+        if(tot <= h){
+            ans = i;
+            break;
+        }
+    }
+
+    return ans;
+
+}
+
+// -------------------------------------------------------------------------------------------------------
+
+int calcH(int hrs,vector<int>&vec){
+    int ans = 0;
+    int n = vec.size();
+    for(int i=0;i<n;i++){
+        ans += ceil((double)vec[i] / (double)hrs);
+    }
+    return ans;
+}
+
+int BSOA(vector<int>vec,int h){
+    int low = 1;
+    int high = *max_element(vec.begin(),vec.end());
+    // int ans = INT_MAX;
+    while(low <= high){
+        int mid = (low+high)/2;
+        int total = calcH(mid,vec);
+        if(total <= h){
+            high = mid-1;
+        }else{
+            low = mid+1;
+        }
+    }
+
+    return low;
+
+}
+// -------------------------------------------------------------------------------------------------------
+
+int MNODMB_Nieve(vector<int>&vec,int k, int m ){
+    int n = vec.size();
+    if(n < (m*k)){
+        return -1;
+    }
+
+    int ans = INT_MIN;
+    priority_queue<int,vector<int>,greater<int>>pq;
+    int sum = 0;
+    for(int i=0;i<k;i++){
+        sum += vec[i];
+    }
+    pq.push(sum);
+
+    for(int i=k;i<n;i++){
+        sum  += vec[i] - vec[i-k];
+        pq.push(sum);
+    }
+
+    while(m--){
+        ans = max(ans,pq.top());
+        pq.pop();
+    }
+
+
+
+    return ans;
+}
+
+
+
+
+// -------------------------------------------------------------------------------------------------------
+
+
+
 
 int main(){
 #ifndef ONLINE_JUDGE
@@ -274,7 +374,29 @@ freopen("output.txt","w",stdout);
 
 //FIND SQRT USING BINARY SEARCH ON ANSWER
 
-cout<<sqrt(25)<<endl;
+// cout<<sqrt(25)<<endl;   // (O) log n :- TC
+
+
+
+// COCO EATING BANANAS LEETCODE
+
+// vector<int>vec ={30,11,23,4,20};
+// int h =5;
+
+//cout<<bruteForce(vec,h); // This is brute force approac
+
+// cout<<BSOA(vec,h)<<endl;
+
+// 1482. Minimum Number of Days to Make m Bouquets
+
+vector<int>vec = {7,7,7,7,12,7,7};
+int m =2;
+int k=3;
+
+cout<<MNODMB_Nieve(vec,k,m)<<endl;
+
+
+
 
 return 0;
 }
